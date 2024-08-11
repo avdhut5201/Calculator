@@ -43,9 +43,12 @@ class Calculator:
             ZeroDivisionError("Can't divide by zero")
         else:
          return self.first / self.second
+        
     def is_valid_infix(self,equation_object):
         operators = set("+-*/^")
         expression=equation_object["expression"]
+        if (len(expression)>40 ):
+           raise OverflowError("No more than 40")
         if(len(expression)<3 or expression.isnumeric() ):
             equation_object["is_infix"]=False
         infix_notation= expression.split()
@@ -60,10 +63,13 @@ class Calculator:
                     if(not infix_notation[note].isdigit()):
                         equation_object["is_infix"]=False
                         break;
+                   # return infix_notation[note]
+
                 if(note%2==1):
                     if( infix_notation[note] not in operators):
                         equation_object["is_infix"]=False
-                        break;
+                        break
+                    #return infix_notation[note]
 
 
 

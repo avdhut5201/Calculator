@@ -1,13 +1,12 @@
 import unittest
 from unittest import result 
-from Source import Calculator,Input
+from Source import Calculator
 
 
 class CalculatorTests(unittest.TestCase):
 
     def setUp(self):
         self.calculator = Calculator.Calculator()
-        self.Input=Input.Input()
     def test_add_method(self):
         result = self.calculator.addition(4, 2)
         self.assertEqual(6, result)
@@ -29,13 +28,11 @@ class CalculatorTests(unittest.TestCase):
         self.assertEquals(inputexpr,result["expression"])
         self.assertTrue(result["is_infix"])
     
-
     def test_should_return_false_when_there_is_single_digit(self):
          equation= self.calculator.get_Calculator("2")
          result=self.calculator.is_valid_infix(equation)
          self.assertFalse(result)
     
-
     def test_given_equation_should_return_falsewhen_unknown_operator_occurs(self):
         inputexpr="2 + 2 - 2 * 4 / 5 ^ 1 % 5"
         equation=self.calculator.get_Calculator(inputexpr)
@@ -54,12 +51,19 @@ class CalculatorTests(unittest.TestCase):
         equation=self.calculator.get_Calculator(inputexpr)
         result=self.calculator.is_valid_infix(equation)
         self.assertFalse(result)
+    
+    
+    def test_given_equation_should_return_falsewhen_partial_infix_occurs(self): # New Test 
+        inputexpr="222 -"
+        equation=self.calculator.get_Calculator(inputexpr)
+        result=self.calculator.is_valid_infix(equation)
+    
+
 
     def test_given_equation_isinfix(self):
         inputexpr="223 + 21 - 432 * 40 / 5 ^ 1"
         equation=self.calculator.get_Calculator(inputexpr)
         result=self.calculator.is_valid_infix(equation)
-       
         self.assertTrue(result)
     
     def test_Postfix_Evaluation(self):
@@ -68,8 +72,7 @@ class CalculatorTests(unittest.TestCase):
         result=self.calculator.evaluation(expression)
         self.assertEquals(4.4,result)
 
-        
-    
+
     
     
 
